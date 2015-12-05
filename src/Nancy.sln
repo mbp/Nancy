@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A600DC5F-275B-4AF3-80B2-8D6A1997AB88}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy", "Nancy\Nancy.xproj", "{4A80CE6F-6B55-403C-9841-811C4D4A14F7}"

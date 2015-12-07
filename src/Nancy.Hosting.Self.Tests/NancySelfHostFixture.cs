@@ -5,6 +5,8 @@ namespace Nancy.Hosting.Self.Tests
     using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Threading;
 
     using FakeItEasy;
@@ -186,6 +188,24 @@ namespace Nancy.Hosting.Self.Tests
                 var response = reader.ReadToEnd();
 
                 response.ShouldEqual("This is the site home");
+            }
+        }
+
+        [Fact]
+        public void Should_respect_reason_phrase()
+        {
+            using (CreateAndOpenSelfHost())
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var url = BaseUri.ToString().TrimEnd('/');
+                    httpClient.BaseAddress = new Uri(url);
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage response = httpClient.GetAsync("/base/notfound").Result;
+                    response.ReasonPhrase.ShouldEqual("foobar");
+                }
             }
         }
 

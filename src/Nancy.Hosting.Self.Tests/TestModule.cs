@@ -9,6 +9,11 @@
         {
         	Get["/"] = parameters => "This is the site home";
 
+            Get["/notfound"] = parameters =>
+            {
+                return new NotFoundResponse { ReasonPhrase = "foobar", };
+            };
+
             Get["/rel"] = parameters => "This is the site route";
 
             Get["/rel/header"] = parameters =>
